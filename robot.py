@@ -12,13 +12,17 @@ class MyRobot(wpilib.SampleRobot):
 
         # inits all 10 motors in an array
         while (i < 10):
-            self.motors[i] = wpilib.Jaguar(i)
+            self.motors.append(wpilib.Jaguar(i))
             i = i + 1
 
         self.stick = wpilib.Joystick(0) # initialize the joystick on port 0
 
     def operatorControl(self):
         while self.isOperatorControl() and self.isEnabled():
+            # reset all motors
+            for motor in self.motors:
+                motor.set(0)
+
             i = 1
             self.buttons = []
 
